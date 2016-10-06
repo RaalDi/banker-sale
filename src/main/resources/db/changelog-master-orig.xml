@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-1">
+        <createSequence sequenceName="address_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-2">
+        <createSequence sequenceName="cash_register_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-3">
+        <createSequence sequenceName="company_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-4">
+        <createSequence sequenceName="currency_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-5">
+        <createSequence sequenceName="lottery_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-6">
+        <createSequence sequenceName="member_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-7">
+        <createSequence sequenceName="payment_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-8">
+        <createSequence sequenceName="permission_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-9">
+        <createSequence sequenceName="person_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-10">
+        <createSequence sequenceName="play_order_line_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-11">
+        <createSequence sequenceName="play_order_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-12">
+        <createSequence sequenceName="play_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-13">
+        <createSequence sequenceName="restrict_play_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-14">
+        <createSequence sequenceName="role_permission_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-15">
+        <createSequence sequenceName="role_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-16">
+        <createSequence sequenceName="session_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-17">
+        <createSequence sequenceName="session_state_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-18">
+        <createSequence sequenceName="shop_seq_id"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-19">
+        <createTable tableName="address">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="zipcode" type="VARCHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-20">
+        <createTable tableName="cash_register">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="closed" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="closed_amount" type="numeric(19, 2)"/>
+            <column name="opened" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="opened_amount" type="numeric(19, 2)"/>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="session_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-21">
+        <createTable tableName="company">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-22">
+        <createTable tableName="currency">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="numeric(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-23">
+        <createTable tableName="lottery">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="short_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-24">
+        <createTable tableName="member">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-25">
+        <createTable tableName="payment">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-26">
+        <createTable tableName="permission">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-27">
+        <createTable tableName="person">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="loggedin_date" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="VARCHAR(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="BIGINT"/>
+            <column name="company_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shop_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-28">
+        <createTable tableName="play">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="short_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-29">
+        <createTable tableName="play_order">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="numeric(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="canceled" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="winner" type="BOOL"/>
+            <column name="cash_register_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="shop_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-30">
+        <createTable tableName="play_order_line">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="numeric(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="canceled" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="winner" type="BOOL"/>
+            <column name="play_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="play_order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-31">
+        <createTable tableName="play_order_line_lottery">
+            <column name="play_order_line_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lottery_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-32">
+        <createTable tableName="play_order_line_number">
+            <column name="play_order_line_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="played_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-33">
+        <createTable tableName="restrict_play">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="play_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-34">
+        <createTable tableName="restrict_play_lottery">
+            <column name="restrict_play_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lottery_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-35">
+        <createTable tableName="restrict_play_number">
+            <column name="restrict_play_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="restricted_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-36">
+        <createTable tableName="role">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-37">
+        <createTable tableName="role_permission">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="permission_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-38">
+        <createTable tableName="session">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ended" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="started" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="state" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-39">
+        <createTable tableName="session_state">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-40">
+        <createTable tableName="shop">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="created_uid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
+            <column name="updated_uid" type="BIGINT"/>
+            <column name="optlock" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="BIGINT"/>
+            <column name="company_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-41">
+        <addPrimaryKey columnNames="id" constraintName="address_pkey" tableName="address"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-42">
+        <addPrimaryKey columnNames="id" constraintName="cash_register_pkey" tableName="cash_register"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-43">
+        <addPrimaryKey columnNames="id" constraintName="company_pkey" tableName="company"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-44">
+        <addPrimaryKey columnNames="id" constraintName="currency_pkey" tableName="currency"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-45">
+        <addPrimaryKey columnNames="id" constraintName="lottery_pkey" tableName="lottery"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-46">
+        <addPrimaryKey columnNames="id" constraintName="member_pkey" tableName="member"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-47">
+        <addPrimaryKey columnNames="id" constraintName="payment_pkey" tableName="payment"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-48">
+        <addPrimaryKey columnNames="id" constraintName="permission_pkey" tableName="permission"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-49">
+        <addPrimaryKey columnNames="id" constraintName="person_pkey" tableName="person"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-50">
+        <addPrimaryKey columnNames="play_order_line_id, lottery_id" constraintName="play_order_line_lottery_pkey" tableName="play_order_line_lottery"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-51">
+        <addPrimaryKey columnNames="id" constraintName="play_order_line_pkey" tableName="play_order_line"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-52">
+        <addPrimaryKey columnNames="id" constraintName="play_order_pkey" tableName="play_order"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-53">
+        <addPrimaryKey columnNames="id" constraintName="play_pkey" tableName="play"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-54">
+        <addPrimaryKey columnNames="restrict_play_id, lottery_id" constraintName="restrict_play_lottery_pkey" tableName="restrict_play_lottery"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-55">
+        <addPrimaryKey columnNames="id" constraintName="restrict_play_pkey" tableName="restrict_play"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-56">
+        <addPrimaryKey columnNames="id" constraintName="role_permission_pkey" tableName="role_permission"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-57">
+        <addPrimaryKey columnNames="id" constraintName="role_pkey" tableName="role"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-58">
+        <addPrimaryKey columnNames="id" constraintName="session_pkey" tableName="session"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-59">
+        <addPrimaryKey columnNames="id" constraintName="session_state_pkey" tableName="session_state"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-60">
+        <addPrimaryKey columnNames="id" constraintName="shop_pkey" tableName="shop"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-61">
+        <addUniqueConstraint columnNames="user_id" constraintName="uk_1najjglnomhy0ejqqkofc3svh" tableName="session"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-62">
+        <addUniqueConstraint columnNames="name" constraintName="uk_4oqx6v37ow5c0ja8b549tdao" tableName="session_state"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-63">
+        <addUniqueConstraint columnNames="session_id" constraintName="uk_67m37ed9b45fpb9hc41kim2dy" tableName="cash_register"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-64">
+        <addUniqueConstraint columnNames="type" constraintName="uk_6iimud60snj71mkcqnim7hpei" tableName="payment"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-65">
+        <addUniqueConstraint columnNames="name" constraintName="uk_7d8a768x6aiuvmsa24hqiharg" tableName="role"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-66">
+        <addUniqueConstraint columnNames="name" constraintName="uk_8dq2qiljf43ocs24vc1cdaobm" tableName="shop"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-67">
+        <addUniqueConstraint columnNames="play_id" constraintName="uk_cnm47se8274q2svlw1y5v6ptg" tableName="play_order_line"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-68">
+        <addUniqueConstraint columnNames="user_name" constraintName="uk_e76i3q6dk7y68q7vpkobc71tx" tableName="person"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-69">
+        <addUniqueConstraint columnNames="short_name" constraintName="uk_ed3p5ip4nsp8a03rx1g3ifdns" tableName="play"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-70">
+        <addUniqueConstraint columnNames="name" constraintName="uk_hc32qrh13rpw5ev30qt67y8r" tableName="play"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-71">
+        <addUniqueConstraint columnNames="short_name" constraintName="uk_jgjyj0dac1sgj69vtnak0l1ru" tableName="lottery"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-72">
+        <addUniqueConstraint columnNames="name" constraintName="uk_m3j6m9ksltume23qomatoes1r" tableName="permission"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-73">
+        <addUniqueConstraint columnNames="name" constraintName="uk_mu1y7xfkhmd7v0btfs1eayd10" tableName="lottery"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-74">
+        <addUniqueConstraint columnNames="restrict_play_id, restricted_number" constraintName="uki1vxf403rbbysb22gxiaa03o7" tableName="restrict_play_number"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-75">
+        <addUniqueConstraint columnNames="user_id, role_id, permission_id" constraintName="ukso6e6rhq194wnj2gfpdjhf76o" tableName="role_permission"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-76">
+        <addForeignKeyConstraint baseColumnNames="restrict_play_id" baseTableName="restrict_play_number" constraintName="fk3bxhavmviero2biie7ite4qy7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="restrict_play"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-77">
+        <addForeignKeyConstraint baseColumnNames="play_id" baseTableName="restrict_play" constraintName="fk5waikje0mx60b9o8k402boqf7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="play"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-78">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="person" constraintName="fk8o38rb8nibq9ir9ncptv8nmr6" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="company"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-79">
+        <addForeignKeyConstraint baseColumnNames="play_order_id" baseTableName="play_order_line" constraintName="fk9wfmbg0v70pu1ugrpn87e52x2" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="play_order"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-80">
+        <addForeignKeyConstraint baseColumnNames="session_id" baseTableName="cash_register" constraintName="fkabklpuj4bpp3jri0ywge8sn14" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="session"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-81">
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="person" constraintName="fkae6g74naefukvs2jbryjyx5mh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-82">
+        <addForeignKeyConstraint baseColumnNames="permission_id" baseTableName="role_permission" constraintName="fkaxqtkkksr2o7sbssm7cbydnbs" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="permission"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-83">
+        <addForeignKeyConstraint baseColumnNames="shop_id" baseTableName="person" constraintName="fkay9ivlenq7sxyu5cinngw5o03" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="shop"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-84">
+        <addForeignKeyConstraint baseColumnNames="play_order_line_id" baseTableName="play_order_line_number" constraintName="fkffqwty9ydwe6b25oyw14e37c1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="play_order_line"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-85">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="shop" constraintName="fkg5c2reiv3sfwudvnkxk00f04v" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="company"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-86">
+        <addForeignKeyConstraint baseColumnNames="play_order_line_id" baseTableName="play_order_line_lottery" constraintName="fkgy7v4kx54yr7bmtrmqmhyk5ir" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="play_order_line"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-87">
+        <addForeignKeyConstraint baseColumnNames="shop_id" baseTableName="play_order" constraintName="fkig3n2xcjhwryx5rtxbx99armh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="shop"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-88">
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="shop" constraintName="fkj81y9xrpayl1tak5q0yns5xk3" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-89">
+        <addForeignKeyConstraint baseColumnNames="restrict_play_id" baseTableName="restrict_play_lottery" constraintName="fkmlk747cy8j9cnnx3ev5jhfp86" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="restrict_play"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-90">
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="company" constraintName="fkn6u8jp11ac07ya5eda2agod5o" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-91">
+        <addForeignKeyConstraint baseColumnNames="lottery_id" baseTableName="restrict_play_lottery" constraintName="fkol3clxlcb734pcbi71r3xam4c" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="lottery"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-92">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="role_permission" constraintName="fkonkb3lbd5mpvfcobxnklep1bo" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-93">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="session" constraintName="fkr0ku3trf924k9m8haxi7fu5ff" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-94">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="role_permission" constraintName="fkr1667acs365lcik4j31rlcte" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="person"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-95">
+        <addForeignKeyConstraint baseColumnNames="lottery_id" baseTableName="play_order_line_lottery" constraintName="fkr2f90u0qy94qfl4e7k785akbd" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="lottery"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-96">
+        <addForeignKeyConstraint baseColumnNames="payment_id" baseTableName="play_order" constraintName="fkrl199hwhvneanllhrt8eusrk5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="payment"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-97">
+        <addForeignKeyConstraint baseColumnNames="cash_register_id" baseTableName="play_order" constraintName="fks3yjen7ay588xdlhkf1y2rrj" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="cash_register"/>
+    </changeSet>
+    <changeSet author="rafaeldiaz (generated)" id="1459675128747-98">
+        <addForeignKeyConstraint baseColumnNames="play_id" baseTableName="play_order_line" constraintName="fksmgv2lh4iy3v9ebygjkk6a45t" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="play"/>
+    </changeSet>
+</databaseChangeLog>
