@@ -4,7 +4,7 @@ import com.raaldi.banker.util.model.AbstractModel;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -25,6 +25,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "session_state")
 @NamedQueries({ @NamedQuery(name = "SessionState.findAll", query = "SELECT c FROM SessionState c") })
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class SessionState extends AbstractModel {
 
@@ -35,9 +36,7 @@ public class SessionState extends AbstractModel {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "session-state-seq-gen")
   private long id;
 
-  @NonNull
   @NotNull
   @Column(name = "name", nullable = false, unique = true)
   private String name;
-
 }

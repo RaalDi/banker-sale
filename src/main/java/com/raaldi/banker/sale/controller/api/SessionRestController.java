@@ -81,7 +81,7 @@ public class SessionRestController {
     currentSession.setState(session.getState());
     currentSession.setCompanyName(session.getCompanyName());
     currentSession.setShopName(session.getShopName());
-    currentSession.setUserName(session.getUserName());
+    currentSession.setUsername(session.getUsername());
     /**
      * TODO: Update entity model service
      */

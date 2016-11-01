@@ -4,7 +4,7 @@ import com.raaldi.banker.util.model.AbstractModel;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -33,6 +33,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "play_order")
 @NamedQueries({ @NamedQuery(name = "PlayOrder.findAll", query = "SELECT c FROM PlayOrder c") })
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class PlayOrder extends AbstractModel {
 
@@ -43,46 +44,40 @@ public class PlayOrder extends AbstractModel {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "play-order-seq-gen")
   private long id;
 
-  @NonNull
   @NotNull
   @Column(name = "company_name", nullable = false, insertable = true, updatable = false)
   private String companyName;
 
-  @NonNull
   @NotNull
   @Column(name = "shop_name", nullable = false, insertable = true, updatable = false)
   private String shopName;
 
-  @NonNull
   @NotNull
   @Column(name = "user_name", nullable = false, insertable = true, updatable = false)
   private String username;
 
-  @NonNull
   @NotNull
-  @Column(name = "amount", insertable = true, updatable = false)
+  @Column(name = "amount", nullable = false, insertable = true, updatable = false)
   private BigDecimal amount;
 
-  @NonNull
   @NotNull
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "payment_id", nullable = false, updatable = false)
   private Payment payment;
 
-  @NonNull
   @NotNull
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "cash_register_id", nullable = false, updatable = false)
   private CashRegister cashRegister;
 
-  @Column(name = "winner", insertable = false, updatable = true)
+  @NotNull
+  @Column(name = "winner", nullable = false, columnDefinition = "boolean default false")
   private boolean winner;
 
   @NotNull
-  @Column(name = "canceled")
+  @Column(name = "canceled", nullable = false, columnDefinition = "boolean default false")
   private boolean canceled;
 
-  @NonNull
   @NotNull
   @OneToMany(mappedBy = "playOrder", cascade = CascadeType.ALL)
   private List<PlayOrderLine> playOrderLines = Collections.emptyList();

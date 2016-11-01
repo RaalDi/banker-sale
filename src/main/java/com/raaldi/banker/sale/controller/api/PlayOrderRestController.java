@@ -83,7 +83,7 @@ public class PlayOrderRestController {
     currentPlayOrder.setPlayOrderLines(playOrder.getPlayOrderLines());
     currentPlayOrder.setCompanyName(playOrder.getCompanyName());
     currentPlayOrder.setShopName(playOrder.getShopName());
-    currentPlayOrder.setUserName(playOrder.getUserName());
+    currentPlayOrder.setUsername(playOrder.getUsername());
     currentPlayOrder.setWinner(playOrder.isWinner());
     /**
      * TODO: Update entity model service

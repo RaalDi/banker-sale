@@ -1,17 +1,21 @@
 package com.raaldi.banker.sale.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.raaldi.banker.util.CashRegisterState;
 import com.raaldi.banker.util.model.AbstractModel;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,8 +31,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -36,6 +38,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "cash_register")
 @NamedQueries({ @NamedQuery(name = "CashRegister.findAll", query = "SELECT c FROM CashRegister c") })
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class CashRegister extends AbstractModel {
 
@@ -46,7 +49,6 @@ public class CashRegister extends AbstractModel {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cash-register-seq-gen")
   private long id;
 
-  @NonNull
   @NotNull
   @OneToOne(optional = false)
   @JoinColumn(name = "session_id", nullable = false, insertable = true, updatable = false)
@@ -55,13 +57,15 @@ public class CashRegister extends AbstractModel {
   @Enumerated(EnumType.STRING)
   private CashRegisterState state;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "opened", insertable = false, updatable = true)
-  private Date opened;
+  @JsonSerialize(using = LocalDateTimeSerializer.class)
+  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+  @Column(name = "opened", insertable = false, updatable = true, columnDefinition = "timestamp")
+  private LocalDateTime opened;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  @Column(name = "closed", insertable = false, updatable = true)
-  private Date closed;
+  @JsonSerialize(using = LocalDateTimeSerializer.class)
+  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+  @Column(name = "closed", insertable = false, updatable = true, columnDefinition = "timestamp")
+  private LocalDateTime closed;
 
   @Column(name = "opened_amount", insertable = false, updatable = true)
   private BigDecimal openedAmount;
@@ -72,46 +76,38 @@ public class CashRegister extends AbstractModel {
   public void setState(final CashRegisterState state) {
     switch (state) {
       case OPENING:
-        this.setCreated(new Date());
+        this.setCreated(LocalDateTime.now());
         break;
       case OPENED:
-        this.setOpened(new Date());
+        this.setOpened(LocalDateTime.now());
         break;
       case CLOSING:
-        this.setUpdated(new Date());
+        this.setUpdated(LocalDateTime.now());
         break;
       case CLOSED:
-        this.setClosed(new Date());
+        this.setClosed(LocalDateTime.now());
         break;
     }
 
     this.state = state;
   }
 
-  public void setOpened(final Date opened) {
+  public void setOpened(final LocalDateTime opened) {
 
     if (openedAmount == null) {
       throw new IllegalArgumentException("CashRegister.openedAmount may not be null when opening the cash register");
     }
 
-    this.opened = opened == null ? null : new Date(opened.getTime());
+    this.opened = opened;
   }
 
-  public Date getOpened() {
-    return opened == null ? null : new Date(opened.getTime());
-  }
-
-  public void setClosed(final Date closed) {
+  public void setClosed(final LocalDateTime closed) {
 
     if (this.closedAmount == null) {
       throw new IllegalArgumentException("CashRegister.closedAmount may not be null when closing the cash register");
     }
 
-    this.closed = closed == null ? null : new Date(closed.getTime());
-  }
-
-  public Date getClosed() {
-    return closed == null ? null : new Date(closed.getTime());
+    this.closed = closed;
   }
 
   @Override

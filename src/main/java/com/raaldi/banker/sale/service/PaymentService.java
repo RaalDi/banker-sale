@@ -30,7 +30,7 @@ public class PaymentService implements ModelService<Payment> {
   }
 
   @Override
-  public Payment findOne(final Long id) {
+  public Payment findOne(final long id) {
     return repository.findOne(id);
   }
 
@@ -45,7 +45,7 @@ public class PaymentService implements ModelService<Payment> {
   }
 
   @Override
-  public boolean exists(final Long id) {
+  public boolean exists(final long id) {
     return repository.exists(id);
   }
 

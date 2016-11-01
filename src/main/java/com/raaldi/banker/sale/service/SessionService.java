@@ -30,7 +30,7 @@ public class SessionService implements ModelService<Session> {
   }
 
   @Override
-  public Session findOne(final Long id) {
+  public Session findOne(final long id) {
     return repository.findOne(id);
   }
 
@@ -45,7 +45,7 @@ public class SessionService implements ModelService<Session> {
   }
 
   @Override
-  public boolean exists(final Long id) {
+  public boolean exists(final long id) {
     return repository.exists(id);
   }
 

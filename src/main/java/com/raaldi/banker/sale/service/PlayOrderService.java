@@ -30,7 +30,7 @@ public class PlayOrderService implements ModelService<PlayOrder> {
   }
 
   @Override
-  public PlayOrder findOne(final Long id) {
+  public PlayOrder findOne(final long id) {
     return repository.findOne(id);
   }
 
@@ -45,7 +45,7 @@ public class PlayOrderService implements ModelService<PlayOrder> {
   }
 
   @Override
-  public boolean exists(final Long id) {
+  public boolean exists(final long id) {
     return repository.exists(id);
   }
 

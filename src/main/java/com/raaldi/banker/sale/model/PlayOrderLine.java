@@ -4,7 +4,7 @@ import com.raaldi.banker.util.model.AbstractModel;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -35,6 +35,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "play_order_line")
 @NamedQueries({ @NamedQuery(name = "PlayOrderLine.findAll", query = "SELECT c FROM PlayOrderLine c") })
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class PlayOrderLine extends AbstractModel {
 
@@ -45,13 +46,11 @@ public class PlayOrderLine extends AbstractModel {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "play-order-line-seq-gen")
   private long id;
 
-  @NonNull
   @NotNull
   @ManyToOne(optional = false)
   @JoinColumn(name = "play_order_id", nullable = false)
   private PlayOrder playOrder;
 
-  @NonNull
   @NotNull
   @Column(name = "play_name", nullable = false, insertable = true, updatable = false)
   private String playName;
@@ -66,15 +65,15 @@ public class PlayOrderLine extends AbstractModel {
   @CollectionTable(name = "play_order_line_number", joinColumns = { @JoinColumn(name = "play_order_line_id") })
   private List<PlayOrderLineNumber> numbers = Collections.emptyList();
 
-  @NonNull
   @NotNull
   @Column(name = "amount", insertable = true, updatable = false)
   private BigDecimal amount;
 
-  @Column(name = "winner", insertable = false, updatable = true)
+  @NotNull
+  @Column(name = "winner", nullable = false, columnDefinition = "boolean default false")
   private boolean winner;
 
   @NotNull
-  @Column(name = "canceled")
+  @Column(name = "canceled", nullable = false, columnDefinition = "boolean default false")
   private boolean canceled;
 }
