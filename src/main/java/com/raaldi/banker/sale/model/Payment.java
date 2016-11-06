@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,8 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Payment")
+@Cacheable(true)
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "Payment")
 @NamedQueries({ @NamedQuery(name = "Payment.findAll", query = "SELECT c FROM Payment c") })
 @Data
 @NoArgsConstructor
@@ -32,7 +34,8 @@ public class Payment extends AbstractModel {
   @Id
   @SequenceGenerator(name = "payment-seq-gen", sequenceName = "payment_seq_id", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment-seq-gen")
-  private long id;
+  @Column(name = "payment_id")
+  private long paymentId;
 
   @NotNull
   @Column(name = "type", nullable = false, unique = true)

@@ -61,7 +61,7 @@ public class PlayOrderRestController {
     service.save(playOrder);
 
     HttpHeaders headers = new HttpHeaders();
-    headers.setLocation(uriBuilder.path("/{id}").buildAndExpand(playOrder.getId()).toUri());
+    headers.setLocation(uriBuilder.path("/{id}").buildAndExpand(playOrder.getPlayOrderId()).toUri());
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
   }
 
@@ -83,7 +83,6 @@ public class PlayOrderRestController {
     currentPlayOrder.setPlayOrderLines(playOrder.getPlayOrderLines());
     currentPlayOrder.setCompanyName(playOrder.getCompanyName());
     currentPlayOrder.setShopName(playOrder.getShopName());
-    currentPlayOrder.setUsername(playOrder.getUsername());
     currentPlayOrder.setWinner(playOrder.isWinner());
     /**
      * TODO: Update entity model service

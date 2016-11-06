@@ -41,7 +41,7 @@ public class SessionService implements ModelService<Session> {
 
   @Override
   public boolean exists(final Session model) {
-    return this.exists(model.getId());
+    return this.exists(model.getSessionId());
   }
 
   @Override

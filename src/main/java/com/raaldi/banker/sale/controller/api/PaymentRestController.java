@@ -61,7 +61,7 @@ public class PaymentRestController {
     service.save(payment);
 
     HttpHeaders headers = new HttpHeaders();
-    headers.setLocation(uriBuilder.path("/{id}").buildAndExpand(payment.getId()).toUri());
+    headers.setLocation(uriBuilder.path("/{id}").buildAndExpand(payment.getPaymentId()).toUri());
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
   }
 

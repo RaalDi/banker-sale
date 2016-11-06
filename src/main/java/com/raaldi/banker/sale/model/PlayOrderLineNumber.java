@@ -19,7 +19,7 @@ public class PlayOrderLineNumber implements Serializable {
   private static final long serialVersionUID = -7239652607366102299L;
 
   @NotNull
-  @Column(name = "played_number", nullable = false, insertable = true, updatable = false)
-  private String number;
+  @Column(name = "play_number", nullable = false, insertable = true, updatable = false)
+  private int number;
 
 }

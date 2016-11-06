@@ -17,6 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -34,7 +35,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "CashRegister")
+@Cacheable(true)
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "CashRegister")
 @Table(name = "cash_register")
 @NamedQueries({ @NamedQuery(name = "CashRegister.findAll", query = "SELECT c FROM CashRegister c") })
 @Data
@@ -47,7 +49,8 @@ public class CashRegister extends AbstractModel {
   @Id
   @SequenceGenerator(name = "cash-register-seq-gen", sequenceName = "cash_register_seq_id", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cash-register-seq-gen")
-  private long id;
+  @Column(name = "cash_register_id")
+  private long cashRegisterId;
 
   @NotNull
   @OneToOne(optional = false)
@@ -59,13 +62,13 @@ public class CashRegister extends AbstractModel {
 
   @JsonSerialize(using = LocalDateTimeSerializer.class)
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  @Column(name = "opened", insertable = false, updatable = true, columnDefinition = "timestamp")
-  private LocalDateTime opened;
+  @Column(name = "opened_date", insertable = false, updatable = true, columnDefinition = "timestamp")
+  private LocalDateTime openedDate;
 
   @JsonSerialize(using = LocalDateTimeSerializer.class)
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  @Column(name = "closed", insertable = false, updatable = true, columnDefinition = "timestamp")
-  private LocalDateTime closed;
+  @Column(name = "closed_date", insertable = false, updatable = true, columnDefinition = "timestamp")
+  private LocalDateTime closedDate;
 
   @Column(name = "opened_amount", insertable = false, updatable = true)
   private BigDecimal openedAmount;
@@ -76,43 +79,42 @@ public class CashRegister extends AbstractModel {
   public void setState(final CashRegisterState state) {
     switch (state) {
       case OPENING:
-        this.setCreated(LocalDateTime.now());
+        this.setCreatedDate(LocalDateTime.now());
         break;
       case OPENED:
-        this.setOpened(LocalDateTime.now());
+        this.setOpenedDate(LocalDateTime.now());
         break;
       case CLOSING:
-        this.setUpdated(LocalDateTime.now());
+        this.setModifiedDate(LocalDateTime.now());
         break;
       case CLOSED:
-        this.setClosed(LocalDateTime.now());
+        this.setClosedDate(LocalDateTime.now());
         break;
     }
 
     this.state = state;
   }
 
-  public void setOpened(final LocalDateTime opened) {
+  public void setOpenedDate(final LocalDateTime openedDate) {
 
     if (openedAmount == null) {
       throw new IllegalArgumentException("CashRegister.openedAmount may not be null when opening the cash register");
     }
 
-    this.opened = opened;
+    this.openedDate = openedDate;
   }
 
-  public void setClosed(final LocalDateTime closed) {
+  public void setClosedDate(final LocalDateTime closedDate) {
 
     if (this.closedAmount == null) {
       throw new IllegalArgumentException("CashRegister.closedAmount may not be null when closing the cash register");
     }
 
-    this.closed = closed;
+    this.closedDate = closedDate;
   }
 
-  @Override
   @PrePersist
-  public void onPersist() {
+  public void onPrePersist() {
     this.setState(CashRegisterState.OPENING);
   }
 }

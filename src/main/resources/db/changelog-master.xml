@@ -1,6 +1,254 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+  xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+  <changeSet author="rafael.diaz" id="session-v1">
+  <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="session" />
+      </not>
+    </preConditions>
+    <createTable tableName="session">
+      <column name="session_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="session_pk"
+          nullable="false" />
+      </column>
+      <column name="company_name" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="shop_name" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="ended_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+      <column name="started_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+      <column name="state" type="VARCHAR(255)" />
+      <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_by" type="VARCHAR(16)">
+        <constraints nullable="false" />
+      </column>
+      <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+      <column name="modified_by" type="VARCHAR(16)" />
+      <column name="version" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <createSequence sequenceName="session_seq_id" />
+  </changeSet>
+
+  <changeSet author="rafael.diaz" id="cash_register-v1">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="cash_register" />
+      </not>
+    </preConditions>
+    <createTable tableName="cash_register">
+      <column name="cash_register_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="cash_register_pk"
+          nullable="false" />
+      </column>
+      <column name="closed_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+      <column name="closed_amount" type="numeric(19, 2)" />
+      <column name="opened_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+      <column name="opened_amount" type="numeric(19, 2)" />
+      <column name="state" type="VARCHAR(255)" />
+      <column name="session_id" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_by" type="VARCHAR(16)">
+        <constraints nullable="false" />
+      </column>
+      <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+      <column name="modified_by" type="VARCHAR(16)" />
+      <column name="version" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <createSequence sequenceName="cash_register_seq_id" />
+    <addUniqueConstraint columnNames="session_id"
+      constraintName="cash_register_uk_session_id" tableName="cash_register" />
+    <addForeignKeyConstraint baseColumnNames="session_id"
+      baseTableName="cash_register" constraintName="cash_register_fk_session_id"
+      deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+      onUpdate="NO ACTION" referencedColumnNames="session_id"
+      referencedTableName="session" />
+  </changeSet>
+
+  <changeSet author="rafael.diaz" id="payment-v1">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="payment" />
+      </not>
+    </preConditions>
+    <createTable tableName="payment">
+      <column name="payment_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="payment_pk"
+          nullable="false" />
+      </column>
+      <column name="active" type="BOOL" defaultValueBoolean="false">
+        <constraints nullable="false" />
+      </column>
+      <column name="type" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_by" type="VARCHAR(16)">
+        <constraints nullable="false" />
+      </column>
+      <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+      <column name="modified_by" type="VARCHAR(16)" />
+      <column name="version" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <createSequence sequenceName="payment_seq_id" />
+    <addUniqueConstraint columnNames="type"
+      constraintName="payment_uk_type" tableName="payment" />
+  </changeSet>
+
+  <changeSet author="rafael.diaz" id="play_order-v1">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="play_order" />
+      </not>
+    </preConditions>
+    <createTable tableName="play_order">
+      <column name="play_order_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="play_order_pk"
+          nullable="false" />
+      </column>
+      <column name="amount" type="numeric(19, 2)">
+        <constraints nullable="false" />
+      </column>
+      <column name="canceled" type="BOOL" defaultValueBoolean="false">
+        <constraints nullable="false" />
+      </column>
+      <column name="winner" type="BOOL" defaultValueBoolean="false">
+        <constraints nullable="false" />
+      </column>
+      <column name="cash_register_id" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+      <column name="payment_id" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+      <column name="company_name" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="shop_name" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_by" type="VARCHAR(16)">
+        <constraints nullable="false" />
+      </column>
+      <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+      <column name="modified_by" type="VARCHAR(16)" />
+      <column name="version" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <createSequence sequenceName="play_order_seq_id" />
+    <addForeignKeyConstraint baseColumnNames="payment_id"
+      baseTableName="play_order" constraintName="play_order_fk_payment_id"
+      deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+      onUpdate="NO ACTION" referencedColumnNames="payment_id"
+      referencedTableName="payment" />
+    <addForeignKeyConstraint baseColumnNames="cash_register_id"
+      baseTableName="play_order" constraintName="play_order_fk_cash_register_id"
+      deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+      onUpdate="NO ACTION" referencedColumnNames="cash_register_id"
+      referencedTableName="cash_register" />
+  </changeSet>
+
+  <changeSet author="rafael.diaz" id="play_order_line-v1">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="play_order_line" />
+      </not>
+    </preConditions>
+    <createTable tableName="play_order_line">
+      <column name="play_order_line_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="play_order_line_pk"
+          nullable="false" />
+      </column>
+      <column name="amount" type="numeric(19, 2)">
+        <constraints nullable="false" />
+      </column>
+      <column name="canceled" type="BOOL" defaultValueBoolean="false">
+        <constraints nullable="false" />
+      </column>
+      <column name="winner" type="BOOL" defaultValueBoolean="false">
+        <constraints nullable="false" />
+      </column>
+      <column name="play_name" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="play_order_id" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_by" type="VARCHAR(16)">
+        <constraints nullable="false" />
+      </column>
+      <column name="modified_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
+      <column name="modified_by" type="VARCHAR(16)" />
+      <column name="version" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <createSequence sequenceName="play_order_line_seq_id" />
+    <addForeignKeyConstraint baseColumnNames="play_order_id"
+      baseTableName="play_order_line" constraintName="play_order_line_fk_play_order_id"
+      deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+      onUpdate="NO ACTION" referencedColumnNames="play_order_id"
+      referencedTableName="play_order" />
+  </changeSet>
+
+  <changeSet author="rafael.diaz" id="play_order_line_lottery-v1">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="play_order_line_lottery" />
+      </not>
+    </preConditions>
+    <createTable tableName="play_order_line_lottery">
+      <column name="play_order_line_id" type="BIGINT">
+        <constraints nullable="false" />
+      </column>
+      <column name="lottery_name" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+    <addPrimaryKey columnNames="play_order_line_id, lottery_name"
+      constraintName="play_order_line_lottery_pk" tableName="play_order_line_lottery" />
+  </changeSet>
+
+  <changeSet author="rafael.diaz" id="play_order_line_number-v1">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="play_order_line_number" />
+      </not>
+    </preConditions>
+    <createTable tableName="play_order_line_number">
+      <column name="play_order_line_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="play_order_line_number_pk"
+          nullable="false" />
+      </column>
+      <column name="play_number" type="INT">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
 
 </databaseChangeLog>

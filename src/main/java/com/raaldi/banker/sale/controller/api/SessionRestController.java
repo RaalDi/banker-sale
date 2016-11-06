@@ -61,7 +61,7 @@ public class SessionRestController {
     service.save(session);
 
     HttpHeaders headers = new HttpHeaders();
-    headers.setLocation(uriBuilder.path("/{id}").buildAndExpand(session.getId()).toUri());
+    headers.setLocation(uriBuilder.path("/{id}").buildAndExpand(session.getSessionId()).toUri());
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
   }
 
@@ -76,12 +76,11 @@ public class SessionRestController {
       return new ResponseEntity<Session>(HttpStatus.NOT_FOUND);
     }
 
-    currentSession.setEnded(session.getEnded());
-    currentSession.setStarted(session.getStarted());
+    currentSession.setEndedDate(session.getEndedDate());
+    currentSession.setStartedDate(session.getStartedDate());
     currentSession.setState(session.getState());
     currentSession.setCompanyName(session.getCompanyName());
     currentSession.setShopName(session.getShopName());
-    currentSession.setUsername(session.getUsername());
     /**
      * TODO: Update entity model service
      */

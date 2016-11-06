@@ -41,7 +41,7 @@ public class PaymentService implements ModelService<Payment> {
 
   @Override
   public boolean exists(final Payment model) {
-    return this.exists(model.getId());
+    return this.exists(model.getPaymentId());
   }
 
   @Override

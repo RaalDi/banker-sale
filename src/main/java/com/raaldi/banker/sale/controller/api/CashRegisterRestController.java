@@ -67,7 +67,7 @@ public class CashRegisterRestController {
     service.save(cashRegister);
 
     HttpHeaders headers = new HttpHeaders();
-    headers.setLocation(uriBuilder.path("/{id}").buildAndExpand(cashRegister.getId()).toUri());
+    headers.setLocation(uriBuilder.path("/{id}").buildAndExpand(cashRegister.getCashRegisterId()).toUri());
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
   }
 
@@ -83,9 +83,9 @@ public class CashRegisterRestController {
       return new ResponseEntity<CashRegister>(HttpStatus.NOT_FOUND);
     }
 
-    currentCashRegister.setClosed(cashRegister.getClosed());
+    currentCashRegister.setClosedDate(cashRegister.getClosedDate());
     currentCashRegister.setClosedAmount(cashRegister.getClosedAmount());
-    currentCashRegister.setOpened(cashRegister.getOpened());
+    currentCashRegister.setOpenedDate(cashRegister.getOpenedDate());
     currentCashRegister.setOpenedAmount(cashRegister.getOpenedAmount());
     currentCashRegister.setSession(cashRegister.getSession());
     currentCashRegister.setState(cashRegister.getState());

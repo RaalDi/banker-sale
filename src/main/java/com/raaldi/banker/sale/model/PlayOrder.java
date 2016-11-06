@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +30,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "PlayOrder")
+@Cacheable(true)
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "PlayOrder")
 @Table(name = "play_order")
 @NamedQueries({ @NamedQuery(name = "PlayOrder.findAll", query = "SELECT c FROM PlayOrder c") })
 @Data
@@ -42,7 +44,8 @@ public class PlayOrder extends AbstractModel {
   @Id
   @SequenceGenerator(name = "play-order-seq-gen", sequenceName = "play_order_seq_id", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "play-order-seq-gen")
-  private long id;
+  @Column(name = "play_order_id")
+  private long playOrderId;
 
   @NotNull
   @Column(name = "company_name", nullable = false, insertable = true, updatable = false)
@@ -51,10 +54,6 @@ public class PlayOrder extends AbstractModel {
   @NotNull
   @Column(name = "shop_name", nullable = false, insertable = true, updatable = false)
   private String shopName;
-
-  @NotNull
-  @Column(name = "user_name", nullable = false, insertable = true, updatable = false)
-  private String username;
 
   @NotNull
   @Column(name = "amount", nullable = false, insertable = true, updatable = false)

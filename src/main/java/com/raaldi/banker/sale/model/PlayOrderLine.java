@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -31,7 +32,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "PlayOrderLine")
+@Cacheable(true)
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "PlayOrderLine")
 @Table(name = "play_order_line")
 @NamedQueries({ @NamedQuery(name = "PlayOrderLine.findAll", query = "SELECT c FROM PlayOrderLine c") })
 @Data
@@ -44,7 +46,8 @@ public class PlayOrderLine extends AbstractModel {
   @Id
   @SequenceGenerator(name = "play-order-line-seq-gen", sequenceName = "play_order_line_seq_id", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "play-order-line-seq-gen")
-  private long id;
+  @Column(name = "play_order_line_id")
+  private long playOrderLineId;
 
   @NotNull
   @ManyToOne(optional = false)

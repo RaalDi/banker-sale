@@ -41,7 +41,7 @@ public class CashRegisterService implements ModelService<CashRegister> {
 
   @Override
   public boolean exists(final CashRegister model) {
-    return this.exists(model.getId());
+    return this.exists(model.getCashRegisterId());
   }
 
   @Override
