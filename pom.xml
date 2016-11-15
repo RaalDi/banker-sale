@@ -24,6 +24,10 @@
   <dependencies>
     <dependency>
       <groupId>com.raaldi.banker</groupId>
+      <artifactId>banker-authenticate</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.raaldi.banker</groupId>
       <artifactId>banker-util</artifactId>
     </dependency>
     <dependency>
@@ -98,12 +102,8 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
-    <!-- 
-    <dependency>
-      <groupId>org.springframework.session</groupId>
-      <artifactId>spring-session</artifactId>
-    </dependency>
-    -->
+    <!-- <dependency> <groupId>org.springframework.session</groupId> <artifactId>spring-session</artifactId> 
+      </dependency> -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
