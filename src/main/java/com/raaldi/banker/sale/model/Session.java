@@ -1,6 +1,5 @@
 package com.raaldi.banker.sale.model;
 
-import com.raaldi.banker.util.SessionState;
 import com.raaldi.banker.util.model.AbstractModel;
 
 import lombok.Data;
