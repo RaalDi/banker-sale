@@ -34,7 +34,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Cacheable(true)
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "PlayOrderLine")
-@Table(name = "play_order_line")
+@Table(name = "bk_play_order_line")
 @NamedQueries({ @NamedQuery(name = "PlayOrderLine.findAll", query = "SELECT c FROM PlayOrderLine c") })
 @Data
 @NoArgsConstructor
@@ -44,8 +44,8 @@ public class PlayOrderLine extends AbstractModel {
   private static final long serialVersionUID = 3148027909146756391L;
 
   @Id
-  @SequenceGenerator(name = "play-order-line-seq-gen", sequenceName = "play_order_line_seq_id", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "play-order-line-seq-gen")
+  @SequenceGenerator(name = "bk-play-order-line-seq-gen", sequenceName = "bk_play_order_line_seq_id", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-play-order-line-seq-gen")
   @Column(name = "play_order_line_id")
   private long playOrderLineId;
 
@@ -60,12 +60,12 @@ public class PlayOrderLine extends AbstractModel {
 
   @NotEmpty
   @ElementCollection
-  @CollectionTable(name = "play_order_line_lottery", joinColumns = { @JoinColumn(name = "play_order_line_id") })
+  @CollectionTable(name = "bk_play_order_line_lottery", joinColumns = { @JoinColumn(name = "play_order_line_id") })
   private Set<PlayOrderLineLottery> lotteries = Collections.emptySet();
 
   @NotEmpty
   @ElementCollection
-  @CollectionTable(name = "play_order_line_number", joinColumns = { @JoinColumn(name = "play_order_line_id") })
+  @CollectionTable(name = "bk_play_order_line_number", joinColumns = { @JoinColumn(name = "play_order_line_id") })
   private List<PlayOrderLineNumber> numbers = Collections.emptyList();
 
   @NotNull

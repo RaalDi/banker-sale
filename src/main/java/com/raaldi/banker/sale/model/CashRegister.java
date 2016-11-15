@@ -37,7 +37,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Cacheable(true)
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "CashRegister")
-@Table(name = "cash_register")
+@Table(name = "bk_cash_register")
 @NamedQueries({ @NamedQuery(name = "CashRegister.findAll", query = "SELECT c FROM CashRegister c") })
 @Data
 @NoArgsConstructor
@@ -47,8 +47,8 @@ public class CashRegister extends AbstractModel {
   private static final long serialVersionUID = 7871256452762586374L;
 
   @Id
-  @SequenceGenerator(name = "cash-register-seq-gen", sequenceName = "cash_register_seq_id", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cash-register-seq-gen")
+  @SequenceGenerator(name = "bk-cash-register-seq-gen", sequenceName = "bk_cash_register_seq_id", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-cash-register-seq-gen")
   @Column(name = "cash_register_id")
   private long cashRegisterId;
 

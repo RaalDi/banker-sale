@@ -32,7 +32,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Cacheable(true)
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "PlayOrder")
-@Table(name = "play_order")
+@Table(name = "bk_play_order")
 @NamedQueries({ @NamedQuery(name = "PlayOrder.findAll", query = "SELECT c FROM PlayOrder c") })
 @Data
 @NoArgsConstructor
@@ -42,8 +42,8 @@ public class PlayOrder extends AbstractModel {
   private static final long serialVersionUID = -2831284612290806696L;
 
   @Id
-  @SequenceGenerator(name = "play-order-seq-gen", sequenceName = "play_order_seq_id", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "play-order-seq-gen")
+  @SequenceGenerator(name = "bk-play-order-seq-gen", sequenceName = "bk_play_order_seq_id", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-play-order-seq-gen")
   @Column(name = "play_order_id")
   private long playOrderId;
 

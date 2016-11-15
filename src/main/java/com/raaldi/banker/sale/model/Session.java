@@ -24,9 +24,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "bk_session")
 @Cacheable(true)
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "Session")
 @NamedQueries({ @NamedQuery(name = "Session.findAll", query = "SELECT c FROM Session c") })
@@ -38,8 +40,8 @@ public class Session extends AbstractModel {
   private static final long serialVersionUID = 5729958504572843209L;
 
   @Id
-  @SequenceGenerator(name = "session-seq-gen", sequenceName = "session_seq_id", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "session-seq-gen")
+  @SequenceGenerator(name = "bk-session-seq-gen", sequenceName = "bk_session_seq_id", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-session-seq-gen")
   @Column(name = "session_id")
   private long sessionId;
 
