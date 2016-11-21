@@ -38,7 +38,7 @@
     <createSequence sequenceName="bk_session_seq_id" />
   </changeSet>
 
-  <changeSet author="rafael.diaz" id="bk-cash_register-v1" context="production">
+  <changeSet author="rafael.diaz" id="bk-cash-register-v1" context="production">
     <preConditions onFail="MARK_RAN">
       <not>
         <tableExists tableName="bk_cash_register" />
@@ -216,7 +216,7 @@
       referencedTableName="bk_bet" />
   </changeSet>
 
-  <changeSet author="rafael.diaz" id="bk-bet_line_lottery-v1" context="production">
+  <changeSet author="rafael.diaz" id="bk-bet-line-lottery-v1" context="production">
     <preConditions onFail="MARK_RAN">
       <not>
         <tableExists tableName="bk_bet_line_lottery" />
@@ -234,7 +234,7 @@
       constraintName="bk_bet_line_lottery_pk" tableName="bk_bet_line_lottery" />
   </changeSet>
 
-  <changeSet author="rafael.diaz" id="bk-bet_line_number-v1" context="production">
+  <changeSet author="rafael.diaz" id="bk-bet-line-number-v1" context="production">
     <preConditions onFail="MARK_RAN">
       <not>
         <tableExists tableName="bk_bet_line_number" />
