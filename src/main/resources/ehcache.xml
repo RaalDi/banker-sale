@@ -18,17 +18,17 @@
     <persistence strategy="localTempSwap" />
   </cache>
 
-  <cache name="Payment" maxEntriesLocalHeap="10000" eternal="false"
+  <cache name="PaymentType" maxEntriesLocalHeap="10000" eternal="false"
     timeToIdleSeconds="5" timeToLiveSeconds="10">
     <persistence strategy="localTempSwap" />
   </cache>
 
-  <cache name="PlayOrder" maxEntriesLocalHeap="10000" eternal="false"
+  <cache name="Bet" maxEntriesLocalHeap="10000" eternal="false"
     timeToIdleSeconds="5" timeToLiveSeconds="10">
     <persistence strategy="localTempSwap" />
   </cache>
 
-  <cache name="PlayOrderLine" maxEntriesLocalHeap="10000" eternal="false"
+  <cache name="BetLine" maxEntriesLocalHeap="10000" eternal="false"
     timeToIdleSeconds="5" timeToLiveSeconds="10">
     <persistence strategy="localTempSwap" />
   </cache>

@@ -1,9 +1,5 @@
 package com.raaldi.banker.sale.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.raaldi.banker.util.model.AbstractModel;
 
 import lombok.Data;
@@ -51,6 +47,7 @@ public class CashRegister extends AbstractModel {
   @Column(name = "cash_register_id")
   private long cashRegisterId;
 
+  // TODO: Session may not be necessary.
   @NotNull
   @OneToOne(optional = false)
   @JoinColumn(name = "session_id", nullable = false, insertable = true, updatable = false)
@@ -59,13 +56,9 @@ public class CashRegister extends AbstractModel {
   @Enumerated(EnumType.STRING)
   private CashRegisterState state;
 
-  @JsonSerialize(using = LocalDateTimeSerializer.class)
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @Column(name = "opened_date", insertable = false, updatable = true, columnDefinition = "timestamp")
   private LocalDateTime openedDate;
 
-  @JsonSerialize(using = LocalDateTimeSerializer.class)
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @Column(name = "closed_date", insertable = false, updatable = true, columnDefinition = "timestamp")
   private LocalDateTime closedDate;
 

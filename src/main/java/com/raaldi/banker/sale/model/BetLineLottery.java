@@ -14,12 +14,11 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class PlayOrderLineNumber implements Serializable {
+public class BetLineLottery implements Serializable {
 
-  private static final long serialVersionUID = -7239652607366102299L;
+  private static final long serialVersionUID = 4604753242703504870L;
 
   @NotNull
-  @Column(name = "play_number", nullable = false, insertable = true, updatable = false)
-  private int number;
-
+  @Column(name = "lottery_name", nullable = false, insertable = true, updatable = false)
+  private String lotteryName;
 }

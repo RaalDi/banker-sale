@@ -1,12 +1,12 @@
 package com.raaldi.banker.sale.repository;
 
-import com.raaldi.banker.sale.model.Payment;
+import com.raaldi.banker.sale.model.BetLine;
 
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@CacheConfig(cacheNames = "Payment")
-@Repository("paymentRepository")
-public interface PaymentRepository extends CrudRepository<Payment, Long> {
+@CacheConfig(cacheNames = "BetLine")
+@Repository("betLineRepository")
+public interface BetLineRepository extends CrudRepository<BetLine, Long> {
 }

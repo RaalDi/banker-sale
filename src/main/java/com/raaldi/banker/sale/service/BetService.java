@@ -1,7 +1,7 @@
 package com.raaldi.banker.sale.service;
 
-import com.raaldi.banker.sale.model.Payment;
-import com.raaldi.banker.sale.repository.PaymentRepository;
+import com.raaldi.banker.sale.model.Bet;
+import com.raaldi.banker.sale.repository.BetRepository;
 import com.raaldi.banker.util.service.ModelService;
 
 import lombok.NoArgsConstructor;
@@ -10,38 +10,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/** Payment service provides access to the payment repository. */
+/** Play order service provides access to the play order repository. */
 @NoArgsConstructor
-@Service("paymentService")
+@Service("playOrderService")
 @Transactional
-public class PaymentService implements ModelService<Payment> {
+public class BetService implements ModelService<Bet> {
 
-  /** The payment repository. */
-  private PaymentRepository repository;
+  /** The play order repository. */
+  private BetRepository repository;
 
   @Autowired
-  public void setRepository(final PaymentRepository repository) {
+  public void setRepository(final BetRepository repository) {
     this.repository = repository;
   }
 
   @Override
-  public void save(final Payment model) {
+  public void save(final Bet model) {
     repository.save(model);
   }
 
   @Override
-  public Payment findOne(final long id) {
+  public Bet findOne(final long id) {
     return repository.findOne(id);
   }
 
   @Override
-  public Iterable<Payment> findAll() {
+  public Iterable<Bet> findAll() {
     return repository.findAll();
   }
 
   @Override
-  public boolean exists(final Payment model) {
-    return this.exists(model.getPaymentId());
+  public boolean exists(final Bet model) {
+    return this.exists(model.getBetId());
   }
 
   @Override

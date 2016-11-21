@@ -33,26 +33,26 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Cacheable(true)
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "PlayOrderLine")
-@Table(name = "bk_play_order_line")
-@NamedQueries({ @NamedQuery(name = "PlayOrderLine.findAll", query = "SELECT c FROM PlayOrderLine c") })
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "BetLine")
+@Table(name = "bk_bet_line")
+@NamedQueries({ @NamedQuery(name = "BetLine.findAll", query = "SELECT c FROM BetLine c") })
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class PlayOrderLine extends AbstractModel {
+public class BetLine extends AbstractModel {
 
   private static final long serialVersionUID = 3148027909146756391L;
 
   @Id
-  @SequenceGenerator(name = "bk-play-order-line-seq-gen", sequenceName = "bk_play_order_line_seq_id", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-play-order-line-seq-gen")
-  @Column(name = "play_order_line_id")
-  private long playOrderLineId;
+  @SequenceGenerator(name = "bk-bet-line-seq-gen", sequenceName = "bk_bet_line_seq_id", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-bet-line-seq-gen")
+  @Column(name = "bet_line_id")
+  private long betLineId;
 
   @NotNull
   @ManyToOne(optional = false)
-  @JoinColumn(name = "play_order_id", nullable = false)
-  private PlayOrder playOrder;
+  @JoinColumn(name = "bet_id", nullable = false)
+  private Bet bet;
 
   @NotNull
   @Column(name = "play_name", nullable = false, insertable = true, updatable = false)
@@ -60,13 +60,13 @@ public class PlayOrderLine extends AbstractModel {
 
   @NotEmpty
   @ElementCollection
-  @CollectionTable(name = "bk_play_order_line_lottery", joinColumns = { @JoinColumn(name = "play_order_line_id") })
-  private Set<PlayOrderLineLottery> lotteries = Collections.emptySet();
+  @CollectionTable(name = "bk_bet_line_lottery", joinColumns = { @JoinColumn(name = "bet_line_id") })
+  private Set<BetLineLottery> lotteries = Collections.emptySet();
 
   @NotEmpty
   @ElementCollection
-  @CollectionTable(name = "bk_play_order_line_number", joinColumns = { @JoinColumn(name = "play_order_line_id") })
-  private List<PlayOrderLineNumber> numbers = Collections.emptyList();
+  @CollectionTable(name = "bk_bet_line_number", joinColumns = { @JoinColumn(name = "bet_line_id") })
+  private List<BetLineNumber> numbers = Collections.emptyList();
 
   @NotNull
   @Column(name = "amount", insertable = true, updatable = false)

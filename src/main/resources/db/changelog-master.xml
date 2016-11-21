@@ -11,7 +11,7 @@
     </preConditions>
     <createTable tableName="bk_session">
       <column name="session_id" type="BIGINT">
-        <constraints primaryKey="true" primaryKeyName="session_pk"
+        <constraints primaryKey="true" primaryKeyName="bk_session_pk"
           nullable="false" />
       </column>
       <column name="company_name" type="VARCHAR(255)">
@@ -46,7 +46,7 @@
     </preConditions>
     <createTable tableName="bk_cash_register">
       <column name="cash_register_id" type="BIGINT">
-        <constraints primaryKey="true" primaryKeyName="cash_register_pk"
+        <constraints primaryKey="true" primaryKeyName="bk_cash_register_pk"
           nullable="false" />
       </column>
       <column name="closed_date" type="TIMESTAMP(6) WITHOUT TIME ZONE" />
@@ -71,23 +71,23 @@
     </createTable>
     <createSequence sequenceName="bk_cash_register_seq_id" />
     <addUniqueConstraint columnNames="session_id"
-      constraintName="cash_register_uk_session_id" tableName="bk_cash_register" />
+      constraintName="bk_cash_register_uk_session_id" tableName="bk_cash_register" />
     <addForeignKeyConstraint baseColumnNames="session_id"
-      baseTableName="bk_cash_register" constraintName="cash_register_fk_session_id"
+      baseTableName="bk_cash_register" constraintName="bk_cash_register_fk_session_id"
       deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
       onUpdate="NO ACTION" referencedColumnNames="session_id"
       referencedTableName="bk_session" />
   </changeSet>
 
-  <changeSet author="rafael.diaz" id="bk-payment-v1" context="production">
+  <changeSet author="rafael.diaz" id="bk-payment-type-v1" context="production">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="bk_payment" />
+        <tableExists tableName="bk_payment_type" />
       </not>
     </preConditions>
-    <createTable tableName="bk_payment">
-      <column name="payment_id" type="BIGINT">
-        <constraints primaryKey="true" primaryKeyName="payment_pk"
+    <createTable tableName="bk_payment_type">
+      <column name="payment_type_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="bk_payment_type_pk"
           nullable="false" />
       </column>
       <column name="active" type="BOOL" defaultValueBoolean="false">
@@ -108,20 +108,20 @@
         <constraints nullable="false" />
       </column>
     </createTable>
-    <createSequence sequenceName="bk_payment_seq_id" />
+    <createSequence sequenceName="bk_payment_type_seq_id" />
     <addUniqueConstraint columnNames="type"
-      constraintName="payment_uk_type" tableName="bk_payment" />
+      constraintName="bk_payment_type_uk_type" tableName="bk_payment_type" />
   </changeSet>
 
-  <changeSet author="rafael.diaz" id="bk-play_order-v1" context="production">
+  <changeSet author="rafael.diaz" id="bk-bet-v1" context="production">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="bk_play_order" />
+        <tableExists tableName="bk_bet" />
       </not>
     </preConditions>
-    <createTable tableName="bk_play_order">
-      <column name="play_order_id" type="BIGINT">
-        <constraints primaryKey="true" primaryKeyName="play_order_pk"
+    <createTable tableName="bk_bet">
+      <column name="bet_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="bk_bet_pk"
           nullable="false" />
       </column>
       <column name="amount" type="numeric(19, 2)">
@@ -136,7 +136,7 @@
       <column name="cash_register_id" type="BIGINT">
         <constraints nullable="false" />
       </column>
-      <column name="payment_id" type="BIGINT">
+      <column name="payment_type_id" type="BIGINT">
         <constraints nullable="false" />
       </column>
       <column name="company_name" type="VARCHAR(255)">
@@ -157,28 +157,28 @@
         <constraints nullable="false" />
       </column>
     </createTable>
-    <createSequence sequenceName="bk_play_order_seq_id" />
-    <addForeignKeyConstraint baseColumnNames="payment_id"
-      baseTableName="bk_play_order" constraintName="play_order_fk_payment_id"
+    <createSequence sequenceName="bk_bet_seq_id" />
+    <addForeignKeyConstraint baseColumnNames="payment_type_id"
+      baseTableName="bk_bet" constraintName="bk_bet_fk_payment_type_id"
       deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-      onUpdate="NO ACTION" referencedColumnNames="payment_id"
-      referencedTableName="bk_payment" />
+      onUpdate="NO ACTION" referencedColumnNames="payment_type_id"
+      referencedTableName="bk_payment_type" />
     <addForeignKeyConstraint baseColumnNames="cash_register_id"
-      baseTableName="bk_play_order" constraintName="play_order_fk_cash_register_id"
+      baseTableName="bk_bet" constraintName="bk_bet_fk_cash_register_id"
       deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
       onUpdate="NO ACTION" referencedColumnNames="cash_register_id"
       referencedTableName="bk_cash_register" />
   </changeSet>
 
-  <changeSet author="rafael.diaz" id="bk-play_order_line-v1" context="production">
+  <changeSet author="rafael.diaz" id="bk-bet-line-v1" context="production">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="bk_play_order_line" />
+        <tableExists tableName="bk_bet_line" />
       </not>
     </preConditions>
-    <createTable tableName="bk_play_order_line">
-      <column name="play_order_line_id" type="BIGINT">
-        <constraints primaryKey="true" primaryKeyName="play_order_line_pk"
+    <createTable tableName="bk_bet_line">
+      <column name="bet_line_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="bk_bet_line_pk"
           nullable="false" />
       </column>
       <column name="amount" type="numeric(19, 2)">
@@ -193,7 +193,7 @@
       <column name="play_name" type="VARCHAR(255)">
         <constraints nullable="false" />
       </column>
-      <column name="play_order_id" type="BIGINT">
+      <column name="bet_id" type="BIGINT">
         <constraints nullable="false" />
       </column>
       <column name="created_date" type="TIMESTAMP(6) WITHOUT TIME ZONE">
@@ -208,41 +208,41 @@
         <constraints nullable="false" />
       </column>
     </createTable>
-    <createSequence sequenceName="bk_play_order_line_seq_id" />
-    <addForeignKeyConstraint baseColumnNames="play_order_id"
-      baseTableName="bk_play_order_line" constraintName="play_order_line_fk_play_order_id"
+    <createSequence sequenceName="bk_bet_line_seq_id" />
+    <addForeignKeyConstraint baseColumnNames="bet_id"
+      baseTableName="bk_bet_line" constraintName="bk_bet_line_fk_bet_id"
       deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
-      onUpdate="NO ACTION" referencedColumnNames="play_order_id"
-      referencedTableName="bk_play_order" />
+      onUpdate="NO ACTION" referencedColumnNames="bet_id"
+      referencedTableName="bk_bet" />
   </changeSet>
 
-  <changeSet author="rafael.diaz" id="bk-play_order_line_lottery-v1" context="production">
+  <changeSet author="rafael.diaz" id="bk-bet_line_lottery-v1" context="production">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="bk_play_order_line_lottery" />
+        <tableExists tableName="bk_bet_line_lottery" />
       </not>
     </preConditions>
-    <createTable tableName="bk_play_order_line_lottery">
-      <column name="play_order_line_id" type="BIGINT">
+    <createTable tableName="bk_bet_line_lottery">
+      <column name="bet_line_id" type="BIGINT">
         <constraints nullable="false" />
       </column>
       <column name="lottery_name" type="VARCHAR(255)">
         <constraints nullable="false" />
       </column>
     </createTable>
-    <addPrimaryKey columnNames="play_order_line_id, lottery_name"
-      constraintName="play_order_line_lottery_pk" tableName="bk_play_order_line_lottery" />
+    <addPrimaryKey columnNames="bet_line_id, lottery_name"
+      constraintName="bk_bet_line_lottery_pk" tableName="bk_bet_line_lottery" />
   </changeSet>
 
-  <changeSet author="rafael.diaz" id="bk-play_order_line_number-v1" context="production">
+  <changeSet author="rafael.diaz" id="bk-bet_line_number-v1" context="production">
     <preConditions onFail="MARK_RAN">
       <not>
-        <tableExists tableName="bk_play_order_line_number" />
+        <tableExists tableName="bk_bet_line_number" />
       </not>
     </preConditions>
-    <createTable tableName="bk_play_order_line_number">
-      <column name="play_order_line_id" type="BIGINT">
-        <constraints primaryKey="true" primaryKeyName="play_order_line_number_pk"
+    <createTable tableName="bk_bet_line_number">
+      <column name="bet_line_id" type="BIGINT">
+        <constraints primaryKey="true" primaryKeyName="bk_bet_line_number_pk"
           nullable="false" />
       </column>
       <column name="play_number" type="INT">

@@ -31,21 +31,21 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Cacheable(true)
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "PlayOrder")
-@Table(name = "bk_play_order")
-@NamedQueries({ @NamedQuery(name = "PlayOrder.findAll", query = "SELECT c FROM PlayOrder c") })
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "Bet")
+@Table(name = "bk_bet")
+@NamedQueries({ @NamedQuery(name = "Bet.findAll", query = "SELECT c FROM Bet c") })
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class PlayOrder extends AbstractModel {
+public class Bet extends AbstractModel {
 
   private static final long serialVersionUID = -2831284612290806696L;
 
   @Id
-  @SequenceGenerator(name = "bk-play-order-seq-gen", sequenceName = "bk_play_order_seq_id", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-play-order-seq-gen")
-  @Column(name = "play_order_id")
-  private long playOrderId;
+  @SequenceGenerator(name = "bk-bet-seq-gen", sequenceName = "bk_bet_seq_id", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-bet-seq-gen")
+  @Column(name = "bet_id")
+  private long betId;
 
   @NotNull
   @Column(name = "company_name", nullable = false, insertable = true, updatable = false)
@@ -61,8 +61,8 @@ public class PlayOrder extends AbstractModel {
 
   @NotNull
   @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "payment_id", nullable = false, updatable = false)
-  private Payment payment;
+  @JoinColumn(name = "payment_type_id", nullable = false, updatable = false)
+  private PaymentType paymentType;
 
   @NotNull
   @OneToOne(cascade = CascadeType.ALL)
@@ -78,6 +78,6 @@ public class PlayOrder extends AbstractModel {
   private boolean canceled;
 
   @NotNull
-  @OneToMany(mappedBy = "playOrder", cascade = CascadeType.ALL)
-  private List<PlayOrderLine> playOrderLines = Collections.emptyList();
+  @OneToMany(mappedBy = "bet", cascade = CascadeType.ALL)
+  private List<BetLine> betLines = Collections.emptyList();
 }

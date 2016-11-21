@@ -22,22 +22,22 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "bk_payment")
+@Table(name = "bk_payment_type")
 @Cacheable(true)
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "Payment")
-@NamedQueries({ @NamedQuery(name = "Payment.findAll", query = "SELECT c FROM Payment c") })
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "PaymentType")
+@NamedQueries({ @NamedQuery(name = "PaymentType.findAll", query = "SELECT c FROM PaymentType c") })
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Payment extends AbstractModel {
+public class PaymentType extends AbstractModel {
 
   private static final long serialVersionUID = 1017925264098582407L;
 
   @Id
-  @SequenceGenerator(name = "bk-payment-seq-gen", sequenceName = "bk_payment_seq_id", allocationSize = 1)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-payment-seq-gen")
-  @Column(name = "payment_id")
-  private long paymentId;
+  @SequenceGenerator(name = "bk-payment-type-seq-gen", sequenceName = "bk_payment_type_seq_id", allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bk-payment-type-seq-gen")
+  @Column(name = "payment_type_id")
+  private long paymentTypeId;
 
   @NotNull
   @Column(name = "type", nullable = false, unique = true)
